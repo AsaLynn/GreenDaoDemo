@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'//使用greendao,添加应用依赖插件
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.think.greendao"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+}
+
+// 配置GreenDao基本参数
+greendao {
+    schemaVersion 4 //当前数据库版本
+    targetGenDir 'src/main/java'//指定生成的Dao,DaoMaster和DaoSession所放置的位置
+    daoPackage 'com.think.greendao.db'//生成的Dao,DaoMaster和DaoSession的包名称
+    //generateTests true//是否生成单元测试,默认生成
+    //targetGenDirTests 'src/androidTest/gen'//设置生成单元测存存放的位置,默认是src/androidTest/java
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'org.greenrobot:greendao:3.2.2'
+    // 添加greendao库
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation project(':library-demonstrate')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+}
+
+
